@@ -15,6 +15,10 @@ namespace BT_01
     {
         //Tạo  DataSet
         DataSet ds = new DataSet();
+        //khai báo các datatable tương ứng với các bảng có chưa dữ liệu
+        DataTable tblKhoa = new DataTable("KHOA");
+        DataTable tblSinhvien = new DataTable("SINHVIEN");
+        DataTable tblKetqua = new DataTable("KETQUA");
         public Form1()
         {
             InitializeComponent();
@@ -22,8 +26,110 @@ namespace BT_01
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Tạo cấu trúc cho các datatable
+            Tao_bang_table();
+            Moc_noi_quan_he_cac_bang();
+            Nhap_lieu_cac_bang();
+        }
+
+        private void Nhap_lieu_cac_bang()
+        {
+            Bang_khoa();
+            Bang_sinhvien();
+            Bang_ketqua();
+        }
+
+        private void Bang_ketqua()
+        {
+            string[] mang_ketqua = File.ReadAllLines(@"..\..\Data\KETQUA.txt");
+            foreach (string chuoi_ketqua in mang_ketqua)
+            {
+                string[] mang_thanh_phan = chuoi_ketqua.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                //Tạo dòng mới datarow
+                DataRow rkq = tblKetqua.NewRow();
+                for (int i = 0; i < mang_thanh_phan.Length; i++)
+                {
+                    rkq[i] = mang_thanh_phan[i];
+                }
+                tblKetqua.Rows.Add(rkq);
+            }
+        }
+
+        private void Bang_sinhvien()
+        {
+            string[] mang_sinhvien = File.ReadAllLines(@"..\..\Data\SINHVIEN.txt");
+            foreach(string chuoi_sinhvien in mang_sinhvien)
+            {
+                string[] mang_thanh_phan = chuoi_sinhvien.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                //Tạo dòng mới datarow
+                DataRow rsv = tblSinhvien.NewRow();
+                for(int i = 0; i < mang_thanh_phan.Length; i++)
+                {
+                    rsv[i] = mang_thanh_phan[i];
+                }
+                tblSinhvien.Rows.Add(rsv);
+            }
+        }
+
+        private void Bang_khoa()
+        {
+            string[] mang_Khoa = File.ReadAllLines(@"..\..\Data\KHOA.txt");
+            foreach(string chuoi_khoa in mang_Khoa)
+            {
+                string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                //Tạo một dòng mới có cấu trúc là datarow
+                DataRow rkh = tblKhoa.NewRow();
+                rkh[0] = mang_thanh_phan[0];
+                rkh[1] = mang_thanh_phan[1];
+                //Thêm dòng tạo này vào tblkhoa
+                tblKhoa.Rows.Add(rkh);
+            }
+        }
+
+        private void Moc_noi_quan_he_cac_bang()
+        {
+            // Tạo mối quan hệ giữa tblkhoa và tblsinhvien
+            ds.Relations.Add("FK_KH_SV", ds.Tables["KHOA"].Columns["MaKH"], ds.Tables["SINHVIEN"].Columns["MaKH"], true);
+            //Tạo mối quan hệ giữa tblsinhvien và tblketqua
+            ds.Relations.Add("FK_SV_KQ", ds.Tables["SINHVIEN"].Columns["MaSV"], ds.Tables["KETQUA"].Columns["MasV"], true);
+            //Loại bỏ Cascade delete trong mối quan hệ
+            ds.Relations["FK_KH_SV"].ChildKeyConstraint.DeleteRule = Rule.None;
+            ds.Relations["FK_SV_KQ"].ChildKeyConstraint.DeleteRule = Rule.None;
+        }
+
+        private void Tao_bang_table()
+        {
+            //Tạo cấu trúc bảng tblkhoa
+            tblKhoa.Columns.Add("MaKH", typeof(string));
+            tblKhoa.Columns.Add("TenKH", typeof(string));
+            //Khóa chính của tblkhoa
+            tblKhoa.PrimaryKey = new DataColumn[] { tblKhoa.Columns["MaKH"] };
+            //Tạo cấu trúc bảng tblsinhvien
+            tblSinhvien.Columns.Add("MaSV", typeof(string));
+            tblSinhvien.Columns.Add("HoSV", typeof(string));
+            tblSinhvien.Columns.Add("TenSV", typeof(string));
+            tblSinhvien.Columns.Add("Phai", typeof(Boolean));
+            tblSinhvien.Columns.Add("NgaySinh", typeof(DateTime));
+            tblSinhvien.Columns.Add("NoiSinh", typeof(string));
+            tblSinhvien.Columns.Add("MaKH", typeof(string));
+            tblSinhvien.Columns.Add("HocBong", typeof(double));
+            //Khóa cính của tblsinhvien
+            tblSinhvien.PrimaryKey = new DataColumn[] { tblSinhvien.Columns["MaSV"] };
+            //Tạo cấu trúc bảng tblketqua
+            tblKetqua.Columns.Add("MaSV", typeof(string));
+            tblKetqua.Columns.Add("MaMH", typeof(string));
+            tblKetqua.Columns.Add("Diem", typeof(Single));
+            //Khóa chính của tblketqua
+            tblKetqua.PrimaryKey = new DataColumn[] { tblKetqua.Columns["MaSV"],tblKetqua.Columns["MaMH"] };
+            //Thêm các datatable vào dataset
+           /* ds.Tables.Add(tblKhoa);
+            ds.Tables.Add(tblSinhvien);
+            ds.Tables.Add(tblKetqua);*/
+            //Thêm các datatable vào dataset cách 2
+            ds.Tables.AddRange(new DataTable[] { tblKhoa, tblKetqua, tblSinhvien });
 
         }
+
         private void button4_Click(object sender, EventArgs e)
         {
 
