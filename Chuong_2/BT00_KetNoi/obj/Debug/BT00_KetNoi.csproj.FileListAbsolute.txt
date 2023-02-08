@@ -1,0 +1,10 @@
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\bin\Debug\BT00_KetNoi.exe.config
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\bin\Debug\BT00_KetNoi.exe
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\bin\Debug\BT00_KetNoi.pdb
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.csproj.AssemblyReference.cache
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.Form1.resources
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.Properties.Resources.resources
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.csproj.GenerateResource.cache
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.csproj.CoreCompileInputs.cache
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.exe
+D:\Lap_Trinh_CSDL\Chuong_2\BT00_KetNoi\obj\Debug\BT00_KetNoi.pdb
