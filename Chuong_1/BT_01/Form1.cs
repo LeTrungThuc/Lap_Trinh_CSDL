@@ -19,6 +19,7 @@ namespace BT_01
         DataTable tblKhoa = new DataTable("KHOA");
         DataTable tblSinhvien = new DataTable("SINHVIEN");
         DataTable tblKetqua = new DataTable("KETQUA");
+        int stt = -1;
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +31,29 @@ namespace BT_01
             Tao_bang_table();
             Moc_noi_quan_he_cac_bang();
             Nhap_lieu_cac_bang();
+            khoi_tao_combo();
+      
+            btndau.PerformClick();
+        }
+
+        private void Gan_du_lieu(int stt)
+        {
+            DataRow rsv = tblSinhvien.Rows[stt];
+            txtmasv.Text = rsv["MaSV"].ToString();
+            txthosv.Text = rsv["HoSV"].ToString();
+            txttensv.Text = rsv["TenSV"].ToString();
+            chkphai.Checked = (Boolean)rsv["Phai"];
+            txtngaysinh.Text = rsv["NgaySinh"].ToString();
+            txtnoisinh.Text = rsv["NoiSinh"].ToString();
+            cbokhoa.SelectedValue = rsv["MaKH"].ToString();
+            txthocbong.Text = rsv["HocBong"].ToString();
+        }
+
+        private void khoi_tao_combo()
+        {
+            cbokhoa.DataSource = tblKhoa;
+            cbokhoa.DisplayMember = "TenKH";
+            cbokhoa.ValueMember = "MaKH";
         }
 
         private void Nhap_lieu_cac_bang()
@@ -132,22 +156,26 @@ namespace BT_01
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            stt = tblSinhvien.Rows.Count-1;
+            Gan_du_lieu(stt);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            stt++;
+            Gan_du_lieu(stt);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            stt--;
+            Gan_du_lieu(stt);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            stt = 0;
+            Gan_du_lieu(stt);
         }
 
         
