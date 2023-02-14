@@ -8,3 +8,4 @@ D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.CoreCompileInputs.cache
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.exe
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.pdb
+D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.Form2.resources

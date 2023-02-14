@@ -8,11 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.OleDb;
-using System.IO;
 
 namespace BT_01_Doc_Du_Lieu
 {
-    public partial class Form1 : Form
+    public partial class Form2 : Form
     {
         //Khai báo các đối tượng để kết nối
         // Chuỗi kết nối đến CSDL Access 2003
@@ -23,23 +22,25 @@ namespace BT_01_Doc_Du_Lieu
         DataTable tblKhoa = new DataTable("KHOA");
         DataTable tblSinhvien = new DataTable("SINHVIEN");
         DataTable tblKetqua = new DataTable("KETQUA");
+        OleDbCommand cmdKhoa;
+        OleDbCommand cmdSinhVien;
+        OleDbCommand cmdKetQua;
         int stt = -1;
-        public Form1()
+        public Form2()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
             //Khởi tạo kết nối 
             cnn = new OleDbConnection(strcon);
             Tao_bang_table();
             Moc_noi_quan_he_cac_bang();
-            Nhap_lieu_cac_bang();
+            Nhap_lieu_cac_bang_Access();
             stt = 0;
             Gan_du_lieu(stt);
             khoi_tao_combo();
-           
         }
 
         private void khoi_tao_combo()
@@ -56,7 +57,7 @@ namespace BT_01_Doc_Du_Lieu
             txtho.Text = rsv["HoSV"].ToString();
             txtten.Text = rsv["TenSV"].ToString();
             chkgioitinh.Checked = (Boolean)rsv["Phai"];
-            dtpngaysinh.Value =(DateTime)rsv["NgaySinh"];
+            dtpngaysinh.Value = (DateTime)rsv["NgaySinh"];
             txtnoisinh.Text = rsv["NoiSinh"].ToString();
             cbokhoa.SelectedValue = rsv["MaKH"].ToString();
             txthocbong.Text = rsv["HocBong"].ToString();
@@ -119,7 +120,7 @@ namespace BT_01_Doc_Du_Lieu
             ds.Tables.AddRange(new DataTable[] { tblKhoa, tblKetqua, tblSinhvien });
 
         }
-        private void Nhap_lieu_cac_bang()
+        private void Nhap_lieu_cac_bang_Access()
         {
             Bang_khoa();
             Bang_sinhvien();
@@ -127,49 +128,69 @@ namespace BT_01_Doc_Du_Lieu
         }
         private void Bang_ketqua()
         {
-            string[] mang_ketqua = File.ReadAllLines(@"..\..\..\Data\KETQUA.txt");
-            foreach (string chuoi_ketqua in mang_ketqua)
+            //Nhập dữ liệu cho bảng tblketqua
+            //Mở kết nối
+            cnn.Open();
+            //2.khởi tạo đối tượng command tương ứng để đọc dữ liệu từ table KETQUA
+            cmdKetQua = new OleDbCommand("select * from ketqua", cnn);
+            //3.Tạo đối tượng DataReader để tiến hành đọc từng dòng dữ liệu trong table KETQUA
+            OleDbDataReader rkq = cmdKetQua.ExecuteReader();
+            //.4 tiến hành đọc dữ liệu với đối tượng DataReader như sau
+            while (rkq.Read()) //Mỗi lần lặp thì rkh trỏ đến 1 dòng trong table KETQUA
             {
-                string[] mang_thanh_phan = chuoi_ketqua.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                //Tạo dòng mới datarow
-                DataRow rkq = tblKetqua.NewRow();
-                for (int i = 0; i < mang_thanh_phan.Length; i++)
-                {
-                    rkq[i] = mang_thanh_phan[i];
-                }
-                tblKetqua.Rows.Add(rkq);
+                DataRow r = tblKetqua.NewRow();
+                for (int i = 0; i < rkq.FieldCount; i++)
+                    r[i] = rkq[i];
+                tblKetqua.Rows.Add(r);
             }
+            //Dóng DataReader và đóng kết nối
+            rkq.Close();
+            cnn.Close();
         }
 
         private void Bang_sinhvien()
         {
-            string[] mang_sinhvien = File.ReadAllLines(@"..\..\..\Data\SINHVIEN.txt");
-            foreach (string chuoi_sinhvien in mang_sinhvien)
+            //Nhập dữ liệu cho bảng tblsinhvien
+            //Mở kết nối
+            cnn.Open();
+            //2.khởi tạo đối tượng command tương ứng để đọc dữ liệu từ table SIHNVIEN
+            cmdSinhVien = new OleDbCommand("select * from sinhvien", cnn);
+            //3.Tạo đối tượng DataReader để tiến hành đọc từng dòng dữ liệu trong table SINHVIEN
+            OleDbDataReader rsv = cmdSinhVien.ExecuteReader();
+            //.4 tiến hành đọc dữ liệu với đối tượng DataReader như sau
+            while (rsv.Read()) //Mỗi lần lặp thì rkh trỏ đến 1 dòng trong table SINHVIEN
             {
-                string[] mang_thanh_phan = chuoi_sinhvien.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                //Tạo dòng mới datarow
-                DataRow rsv = tblSinhvien.NewRow();
-                for (int i = 0; i < mang_thanh_phan.Length; i++)
-                {
-                    rsv[i] = mang_thanh_phan[i];
-                }
-                tblSinhvien.Rows.Add(rsv);
+                DataRow r = tblSinhvien.NewRow();
+                for (int i = 0; i < rsv.FieldCount; i++)
+                    r[i] = rsv[i];
+                tblSinhvien.Rows.Add(r);
             }
+            //Dóng DataReader và đóng kết nối
+            rsv.Close();
+            cnn.Close();
         }
 
         private void Bang_khoa()
         {
-            string[] mang_Khoa = File.ReadAllLines(@"..\..\..\Data\KHOA.txt");
-            foreach (string chuoi_khoa in mang_Khoa)
+            //Nhập dữ liệu cho bảng tblkhoa
+            //Mở kết nối
+            cnn.Open();
+            //2.khởi tạo đối tượng command tương ứng để đọc dữ liệu từ table KHOA
+            cmdKhoa = new OleDbCommand("select * from khoa", cnn);
+            //3.Tạo đối tượng DataReader để tiến hành đọc từng dòng dữ liệu trong table KHOA
+            OleDbDataReader rkh = cmdKhoa.ExecuteReader();
+            //.4 tiến hành đọc dữ liệu với đối tượng DataReader như sau
+            while (rkh.Read()) //Mỗi lần lặp thì rkh trỏ đến 1 dòng trong table KHOA
             {
-                string[] mang_thanh_phan = chuoi_khoa.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
-                //Tạo một dòng mới có cấu trúc là datarow
-                DataRow rkh = tblKhoa.NewRow();
-                rkh[0] = mang_thanh_phan[0];
-                rkh[1] = mang_thanh_phan[1];
-                //Thêm dòng tạo này vào tblkhoa
-                tblKhoa.Rows.Add(rkh);
+                DataRow r = tblKhoa.NewRow();
+                for (int i = 0; i < rkh.FieldCount; i++)
+                    r[i] = rkh[i];
+                tblKhoa.Rows.Add(r);
             }
+            //Dóng DataReader và đóng kết nối
+            rkh.Close();
+            cnn.Close();
+            
         }
 
         private void btntruoc_Click(object sender, EventArgs e)
@@ -187,7 +208,7 @@ namespace BT_01_Doc_Du_Lieu
         private void btnthem_Click(object sender, EventArgs e)
         {
             txtmasv.ReadOnly = false;
-            foreach(Control ctl in this.Controls)
+            foreach (Control ctl in this.Controls)
             {
                 if (ctl is TextBox)
                     (ctl as TextBox).Clear();
@@ -197,7 +218,7 @@ namespace BT_01_Doc_Du_Lieu
                     (ctl as ComboBox).SelectedIndex = 0;
                 else if (ctl is DateTimePicker)
                     (ctl as DateTimePicker).Value = new DateTime(2005, 1, 1);
-                
+
             }
             txtmasv.Focus();
         }
@@ -215,13 +236,27 @@ namespace BT_01_Doc_Du_Lieu
             else
             {
                 rsv.Delete();
+                //Xóa trong CSDL
+                //MỞ kết nối
+                cnn.Open();
+                string chuoi_xoa = "delete from sinhvien where masv=@masv";
+                cmdSinhVien = new OleDbCommand(chuoi_xoa, cnn);
+                //Khai báo paranetter trên như sau
+                cmdSinhVien.Parameters.Add("@masv", OleDbType.Char).Value = txtmasv.Text;
+                int n = cmdSinhVien.ExecuteNonQuery();
+                if (n > 0)
+                    MessageBox.Show("Hủy sinh viên thành công");
                 stt = 0;
                 Gan_du_lieu(stt);
-            }    
+                //Đóng kết nối
+                cnn.Close();
+            }
         }
 
         private void btnghi_Click(object sender, EventArgs e)
         {
+            //Mở kết nối
+            cnn.Open();
             if (txtmasv.ReadOnly)
             {
                 DataRow rsv = tblSinhvien.Rows.Find(txtmasv.Text);
@@ -232,6 +267,8 @@ namespace BT_01_Doc_Du_Lieu
                 rsv["NoiSinh"] = txtnoisinh.Text;
                 rsv["MaKH"] = cbokhoa.SelectedValue.ToString();
                 rsv["HocBong"] = txthocbong.Text;
+                //2.Sửa trong CSDL
+
             }
             else
             {
@@ -254,8 +291,9 @@ namespace BT_01_Doc_Du_Lieu
                 rsv["HocBong"] = txthocbong.Text;
                 tblSinhvien.Rows.Add(rsv);
                 txtmasv.ReadOnly = true;
-
-            }               
+                //Đóng kết nối
+                cnn.Close();
+            }
         }
 
         private void btnkhong_Click(object sender, EventArgs e)
@@ -263,21 +301,5 @@ namespace BT_01_Doc_Du_Lieu
             Gan_du_lieu(stt);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //Ghi tập tin
-            //Lưu ý: tblsinhvien.rows -> tập hợp dòng (không phải là mảng ) => chuyển thành kiểu mảng => chuyển thành kiểu chuỗi
-            //Thuật toán khi 1 Datatable vào tập tin
-            //1.Khai báo 1 mảng chuỗi với 1 phần tử sẽ chứa một chuỗi tương ứng với 1 dòng trong datatable
-            //2.Duyệt qua tập hợp Rows của Datatable và đưa từng dòng vào mảng chuỗi với hàm Join
-            //3.sử dụng phương thức wriAllines để ghi mảng chuỗi vào tập tin SINHVIEN.txt
-            List<string> Mang_chuoi_sinh_vien = new List<string>();
-            foreach(DataRow rsv in tblSinhvien.Rows)
-            {
-                string chuoi_sinh_vien = string.Join("|", rsv.ItemArray);
-                Mang_chuoi_sinh_vien.Add(chuoi_sinh_vien);
-            }
-            File.WriteAllLines(@"..\..\..\Data\SINHVIEN.txt", Mang_chuoi_sinh_vien);
-        }
     }
 }

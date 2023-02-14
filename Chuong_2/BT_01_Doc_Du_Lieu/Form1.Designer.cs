@@ -144,6 +144,7 @@ namespace BT_01_Doc_Du_Lieu
             // 
             this.txtmasv.Location = new System.Drawing.Point(159, 41);
             this.txtmasv.Name = "txtmasv";
+            this.txtmasv.ReadOnly = true;
             this.txtmasv.Size = new System.Drawing.Size(416, 24);
             this.txtmasv.TabIndex = 3;
             // 
@@ -207,6 +208,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btntruoc.TabIndex = 6;
             this.btntruoc.Text = "Trước";
             this.btntruoc.UseVisualStyleBackColor = false;
+            this.btntruoc.Click += new System.EventHandler(this.btntruoc_Click);
             // 
             // btnsau
             // 
@@ -217,6 +219,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btnsau.TabIndex = 6;
             this.btnsau.Text = "Sau";
             this.btnsau.UseVisualStyleBackColor = false;
+            this.btnsau.Click += new System.EventHandler(this.btnsau_Click);
             // 
             // btnthem
             // 
@@ -227,6 +230,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btnthem.TabIndex = 6;
             this.btnthem.Text = "Thêm";
             this.btnthem.UseVisualStyleBackColor = false;
+            this.btnthem.Click += new System.EventHandler(this.btnthem_Click);
             // 
             // btnhuy
             // 
@@ -237,6 +241,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btnhuy.TabIndex = 6;
             this.btnhuy.Text = "Hủy";
             this.btnhuy.UseVisualStyleBackColor = false;
+            this.btnhuy.Click += new System.EventHandler(this.btnhuy_Click);
             // 
             // btnghi
             // 
@@ -247,6 +252,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btnghi.TabIndex = 6;
             this.btnghi.Text = "Ghi";
             this.btnghi.UseVisualStyleBackColor = false;
+            this.btnghi.Click += new System.EventHandler(this.btnghi_Click);
             // 
             // btnkhong
             // 
@@ -257,6 +263,7 @@ namespace BT_01_Doc_Du_Lieu
             this.btnkhong.TabIndex = 6;
             this.btnkhong.Text = "Không";
             this.btnkhong.UseVisualStyleBackColor = false;
+            this.btnkhong.Click += new System.EventHandler(this.btnkhong_Click);
             // 
             // lblstt
             // 
@@ -307,6 +314,7 @@ namespace BT_01_Doc_Du_Lieu
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý sinh viên";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

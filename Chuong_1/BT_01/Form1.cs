@@ -32,21 +32,7 @@ namespace BT_01
             Moc_noi_quan_he_cac_bang();
             Nhap_lieu_cac_bang();
             khoi_tao_combo();
-      
             btndau.PerformClick();
-        }
-
-        private void Gan_du_lieu(int stt)
-        {
-            DataRow rsv = tblSinhvien.Rows[stt];
-            txtmasv.Text = rsv["MaSV"].ToString();
-            txthosv.Text = rsv["HoSV"].ToString();
-            txttensv.Text = rsv["TenSV"].ToString();
-            chkphai.Checked = (Boolean)rsv["Phai"];
-            txtngaysinh.Text = rsv["NgaySinh"].ToString();
-            txtnoisinh.Text = rsv["NoiSinh"].ToString();
-            cbokhoa.SelectedValue = rsv["MaKH"].ToString();
-            txthocbong.Text = rsv["HocBong"].ToString();
         }
 
         private void khoi_tao_combo()
@@ -61,6 +47,18 @@ namespace BT_01
             Bang_khoa();
             Bang_sinhvien();
             Bang_ketqua();
+        }
+        private void Gan_du_lieu(int stt)
+        {
+            DataRow rsv = tblSinhvien.Rows[stt];
+            txtmasv.Text = rsv["MaSV"].ToString();
+            txthosv.Text = rsv["HoSV"].ToString();
+            txttensv.Text = rsv["TenSV"].ToString();
+            chkphai.Checked = (Boolean)rsv["Phai"];
+            txtngaysinh.Text = rsv["NgaySinh"].ToString();
+            txtnoisinh.Text = rsv["NoiSinh"].ToString();
+            cbokhoa.SelectedValue = rsv["MaKH"].ToString();
+            txthocbong.Text = rsv["HocBong"].ToString();
         }
 
         private void Bang_ketqua()
@@ -156,7 +154,7 @@ namespace BT_01
 
         private void button4_Click(object sender, EventArgs e)
         {
-            stt = tblSinhvien.Rows.Count-1;
+            stt = tblSinhvien.Rows.Count - 1;
             Gan_du_lieu(stt);
         }
 
@@ -174,7 +172,7 @@ namespace BT_01
 
         private void button1_Click(object sender, EventArgs e)
         {
-            stt = 0;
+            stt=0;
             Gan_du_lieu(stt);
         }
 
