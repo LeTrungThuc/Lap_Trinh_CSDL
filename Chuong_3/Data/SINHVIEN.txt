@@ -1,0 +1,15 @@
+A01|Nguyễn Ngoan|Cường|True|5/6/1972 12:00:00 AM|Hà nội|AV|20000
+A02|Lý Anh|Huy|True|1/1/1975 12:00:00 AM|TP.HCM|AV|50000
+A03|Lê Khắc|Dung|False|8/12/1974 12:00:00 AM|Bình Định|TH|45000
+A10|Đinh Hữu|Chính|True|5/25/1977 12:00:00 AM|Cà Mau|AV|50000
+A11|Văn Thành|Nho|True|7/5/1971 12:00:00 AM|Cần Giờ|AV|50000
+A12|Nguyễn Văn|Chính|True|1/23/1974 12:00:00 AM|Mỹ Tho|AV|45000
+A13|Trần Thị Yến|Nhi|False|11/23/1975 12:00:00 AM|Cần Thơ|TH|50000
+A14|Nguyễn Thành|Khiêm|True|4/30/1975 12:00:00 AM|TP.HCM|TH|30000
+D09|Đoàn Kiều|Giang|False|1/1/1975 12:00:00 AM|Cần Thơ|SV|50000
+H08|Bùi Quốc|Cường|True|4/18/1976 12:00:00 AM|Tiền Giang|HH|35000
+K04|Tạ Văn|Minh|True|12/26/1974 12:00:00 AM|Hà nội|KT|40000
+S06|Đoàn Thanh|Mai|False|9/25/1976 12:00:00 AM|An Giang|SV|50000
+T07|Lê Ngọc Diễm|Lệ|False|1/26/1975 12:00:00 AM|TP.HCM|TH|50000
+V05|Nguyễn Khắc|Định|True|4/12/1976 12:00:00 AM|Tây Ninh|VL|50000
+V09|Mai Văn|Dũng|True|1/12/1977 12:00:00 AM|Sa Đéc|VL|50000

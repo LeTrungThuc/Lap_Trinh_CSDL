@@ -9,3 +9,14 @@ D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.exe
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.pdb
 D:\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.Form2.resources
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\bin\Debug\BT_01_Doc_Du_Lieu.exe.config
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\bin\Debug\BT_01_Doc_Du_Lieu.exe
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\bin\Debug\BT_01_Doc_Du_Lieu.pdb
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.AssemblyReference.cache
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.Form1.resources
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.Form2.resources
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.Properties.Resources.resources
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.GenerateResource.cache
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.csproj.CoreCompileInputs.cache
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.exe
+D:\LTCSDL_2023\Lap_Trinh_CSDL\Chuong_2\BT_01_Doc_Du_Lieu\obj\Debug\BT_01_Doc_Du_Lieu.pdb

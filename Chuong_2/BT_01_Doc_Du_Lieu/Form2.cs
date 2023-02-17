@@ -268,7 +268,21 @@ namespace BT_01_Doc_Du_Lieu
                 rsv["MaKH"] = cbokhoa.SelectedValue.ToString();
                 rsv["HocBong"] = txthocbong.Text;
                 //2.Sửa trong CSDL
-
+                string chuoi_sua = "update sinhvien set hosv=@hsv, tensv=@tsv, " +
+                    "phai=@ph,ngaysinh=@ngs, noisinh=@ns, makh=@makh, hocbong=@hocbong where masv=@masv";
+                cmdSinhVien = new OleDbCommand(chuoi_sua, cnn);
+                //Khai báo paranetter trên như sau
+                cmdSinhVien.Parameters.Add("@hsv", OleDbType.VarWChar).Value = txtho.Text;
+                cmdSinhVien.Parameters.Add("@tsv", OleDbType.VarWChar).Value = txtten.Text;
+                cmdSinhVien.Parameters.Add("@ph", OleDbType.Boolean).Value = chkgioitinh.Checked;
+                cmdSinhVien.Parameters.Add("@ngs", OleDbType.Date).Value = dtpngaysinh.Value;
+                cmdSinhVien.Parameters.Add("@ns", OleDbType.VarWChar).Value = txtnoisinh.Text;
+                cmdSinhVien.Parameters.Add("@makh", OleDbType.Char).Value = cbokhoa.SelectedValue.ToString();
+                cmdSinhVien.Parameters.Add("@hocbong", OleDbType.Double).Value = txthocbong.Text;
+                cmdSinhVien.Parameters.Add("@masv", OleDbType.Char).Value = txtmasv.Text;
+                int n = cmdSinhVien.ExecuteNonQuery();
+                if (n > 0)
+                    MessageBox.Show("Cập nhật sinh viên thành công");
             }
             else
             {
@@ -291,9 +305,24 @@ namespace BT_01_Doc_Du_Lieu
                 rsv["HocBong"] = txthocbong.Text;
                 tblSinhvien.Rows.Add(rsv);
                 txtmasv.ReadOnly = true;
-                //Đóng kết nối
-                cnn.Close();
+                string chuoi_them = "insert into values(@msv,@hsv,@tsv,@ph,@ngs,@ns,@makh,@hocbong) where masv=@masv";
+                cmdSinhVien = new OleDbCommand(chuoi_them, cnn);
+                //Khai báo paranetter trên như sau
+                cmdSinhVien.Parameters.Add("@masv", OleDbType.Char).Value = txtmasv.Text;
+                cmdSinhVien.Parameters.Add("@hsv", OleDbType.VarWChar).Value = txtho.Text;
+                cmdSinhVien.Parameters.Add("@tsv", OleDbType.VarWChar).Value = txtten.Text;
+                cmdSinhVien.Parameters.Add("@ph", OleDbType.Boolean).Value = chkgioitinh.Checked;
+                cmdSinhVien.Parameters.Add("@ngs", OleDbType.Date).Value = dtpngaysinh.Value;
+                cmdSinhVien.Parameters.Add("@ns", OleDbType.VarWChar).Value = txtnoisinh.Text;
+                cmdSinhVien.Parameters.Add("@makh", OleDbType.Char).Value = cbokhoa.SelectedValue.ToString();
+                cmdSinhVien.Parameters.Add("@hocbong", OleDbType.Double).Value = txthocbong.Text;
+                
+                int n = cmdSinhVien.ExecuteNonQuery();
+                if (n > 0)
+                    MessageBox.Show("Thêm sinh viên thành công");
             }
+            //Đóng kết nối
+            cnn.Close();
         }
 
         private void btnkhong_Click(object sender, EventArgs e)
